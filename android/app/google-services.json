@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "12291031424",
+    "firebase_url": "https://flutter-f1249.firebaseio.com",
+    "project_id": "flutter-f1249",
+    "storage_bucket": "flutter-f1249.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12291031424:android:021f5c25d349d6e922c165",
+        "android_client_info": {
+          "package_name": "co.olaomar.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12291031424-vlkggc81soteaabqd2o82rdbf3m7lhm2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMC8RQvBOEPhTu9W8WZ0wRUcTHnr6OvU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12291031424-vlkggc81soteaabqd2o82rdbf3m7lhm2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12291031424:android:8dbc9262291fb5b222c165",
+        "android_client_info": {
+          "package_name": "com.example.firebase_gsg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12291031424-vlkggc81soteaabqd2o82rdbf3m7lhm2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMC8RQvBOEPhTu9W8WZ0wRUcTHnr6OvU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12291031424-vlkggc81soteaabqd2o82rdbf3m7lhm2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12291031424:android:cfdac776cd41efe622c165",
+        "android_client_info": {
+          "package_name": "com.example.fluttershare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12291031424-vlkggc81soteaabqd2o82rdbf3m7lhm2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMC8RQvBOEPhTu9W8WZ0wRUcTHnr6OvU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12291031424-vlkggc81soteaabqd2o82rdbf3m7lhm2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
