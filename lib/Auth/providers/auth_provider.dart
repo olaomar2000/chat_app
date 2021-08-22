@@ -1,3 +1,4 @@
+import 'package:firebase_gsg/Auth/helpers/sp_helper.dart';
 import 'package:firebase_gsg/Auth/register_request.dart';
 import 'package:firebase_gsg/Auth/helpers/auth_helper.dart';
 import 'package:firebase_gsg/Auth/helpers/firebase_helper.dart';
@@ -33,6 +34,7 @@ class AuthProvider extends ChangeNotifier {
 
    );
    await FirestoreHelper.firestoreHelper.addUserToFirestore(registerRequest);
+   await SPHelper.spHelper.setUser(registerRequest.id);
    await AuthHelper.authHelper.verifyEmail();
    await AuthHelper.authHelper.logout();
   // tabController.animateTo(1);

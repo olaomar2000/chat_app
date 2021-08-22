@@ -1,6 +1,7 @@
 import 'package:firebase_gsg/Auth/providers/auth_provider.dart';
 import 'package:firebase_gsg/Auth/ui/login.dart';
 import 'package:firebase_gsg/services/routes_helper.dart';
+import 'package:firebase_gsg/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,7 @@ class firebase_conf extends StatelessWidget{
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
           print('done');
-          return singup();
+          return splash();
         }
         return Scaffold(
           body: Center(
