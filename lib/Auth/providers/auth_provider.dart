@@ -1,4 +1,4 @@
-import 'package:firebase_gsg/Auth/RegisterRequest.dart';
+import 'package:firebase_gsg/Auth/register_request.dart';
 import 'package:firebase_gsg/Auth/helpers/auth_helper.dart';
 import 'package:firebase_gsg/Auth/helpers/firebase_helper.dart';
 import 'package:firebase_gsg/Auth/ui/login.dart';
@@ -8,7 +8,7 @@ import 'package:firebase_gsg/services/routes_helper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_gsg/Auth/ui/login.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 class AuthProvider extends ChangeNotifier {
 // TabController tabController;
  TextEditingController emailController = TextEditingController();
@@ -22,16 +22,17 @@ class AuthProvider extends ChangeNotifier {
 
  register() async {
   try {
-   await AuthHelper.authHelper
-       .signup(emailController.text, passwordController.text,FName.text,LName.text);
+   UserCredential userCredinial = await AuthHelper.authHelper
+       .signup(emailController.text, passwordController.text);
 
    RegisterRequest registerRequest = RegisterRequest(
-       email: emailController.text,
-       FName:FName.text,
+    id:userCredinial.user.uid,
+    email: emailController.text,
+    LName: LName.text,
+    FName: FName.text
 
-      LName: LName.text,
    );
-   await FirestoreHelper.firestoreHelper.addUserToFirebase(registerRequest);
+   await FirestoreHelper.firestoreHelper.addUserToFirestore(registerRequest);
    await AuthHelper.authHelper.verifyEmail();
    await AuthHelper.authHelper.logout();
   // tabController.animateTo(1);
@@ -45,8 +46,10 @@ class AuthProvider extends ChangeNotifier {
  }
 
  login1() async {
-  await AuthHelper.authHelper
+  UserCredential userCredinial =await AuthHelper.authHelper
       .signin(emailController.text, passwordController.text);
+  FirestoreHelper.firestoreHelper
+      .getUserFromFirestore(userCredinial.user.uid);
   bool isVerifiedEmail = AuthHelper.authHelper.checkEmailVerification();
   if (isVerifiedEmail) {
    print('done');
