@@ -5,7 +5,7 @@ class AuthHelper {
   AuthHelper._();
   static AuthHelper authHelper = AuthHelper._();
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  signup(String email, String password) async {
+  signup(String email, String password,String FName ,String LName) async {
     try {
       UserCredential userCredential = await firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);

@@ -35,6 +35,10 @@ class singup extends StatelessWidget{
                     SizedBox(height: 5,),
                     CustomTextfield('Password',provider. passwordController),
                     SizedBox(height: 5,),
+                    CustomTextfield('First name',provider. passwordController),
+                    SizedBox(height: 5,),
+                    CustomTextfield('last name',provider. passwordController),
+                    SizedBox(height: 5,),
                     CustomButton(provider.register, 'Create an Account', Color(0xff52439A)),
 
 

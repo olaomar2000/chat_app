@@ -57,11 +57,6 @@ class login extends StatelessWidget {
                     ),
 
 
-                    // CustomButton(
-                    //
-                    //    RouteHelper.routeHelper.goToPage(singup.routeName)
-                    //
-                    //     , 'Create an Account', Color(0xff78258B)),
 
                   ],
                 ),

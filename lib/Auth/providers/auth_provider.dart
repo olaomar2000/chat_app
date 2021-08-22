@@ -11,6 +11,8 @@ class AuthProvider extends ChangeNotifier {
 // TabController tabController;
  TextEditingController emailController = TextEditingController();
  TextEditingController passwordController = TextEditingController();
+ TextEditingController FName = TextEditingController();
+ TextEditingController LName = TextEditingController();
  resetControllers() {
   emailController.clear();
   passwordController.clear();
@@ -19,7 +21,9 @@ class AuthProvider extends ChangeNotifier {
  register() async {
   try {
    await AuthHelper.authHelper
-       .signup(emailController.text, passwordController.text);
+       .signup(emailController.text, passwordController.text,FName.text,LName.text);
+
+
    await AuthHelper.authHelper.verifyEmail();
    await AuthHelper.authHelper.logout();
   // tabController.animateTo(1);
