@@ -10,12 +10,27 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_gsg/Auth/ui/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../country_model.dart';
 class AuthProvider extends ChangeNotifier {
 // TabController tabController;
  TextEditingController emailController = TextEditingController();
  TextEditingController passwordController = TextEditingController();
  TextEditingController FName = TextEditingController();
  TextEditingController LName = TextEditingController();
+
+ List<CountryModel> Country;
+ List<dynamic> city = [];
+ CountryModel Selectedcountry;
+ List SelectedCity;
+ selectCity( CountryModel countryModel){
+  this.Selectedcountry =countryModel;
+  this.SelectedCity =countryModel.City;
+  notifyListeners();
+
+
+ }
+
  resetControllers() {
   emailController.clear();
   passwordController.clear();

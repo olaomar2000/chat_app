@@ -9,6 +9,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body:Center(
         child: RaisedButton(onPressed: () {
+
       FirestoreHelper.firestoreHelper.getAllUsersFromFirestore();
     }
     ),
