@@ -1,4 +1,5 @@
-import 'package:firebase_gsg/Auth/helpers/firebase_helper.dart';
+
+import 'package:firebase_gsg/Auth/helpers/firestore_helper.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
