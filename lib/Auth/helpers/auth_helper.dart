@@ -6,6 +6,9 @@ class AuthHelper {
 
   static AuthHelper authHelper = AuthHelper._();
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  String getUserId() {
+    return firebaseAuth.currentUser.uid;
+  }
 
   Future<UserCredential> signup(String email, String password) async {
     try {
@@ -59,5 +62,13 @@ class AuthHelper {
 
   bool checkEmailVerification() {
     return firebaseAuth.currentUser?.emailVerified ?? false;
+  }
+
+  bool checkUserLoging() {
+    if (firebaseAuth.currentUser == null) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

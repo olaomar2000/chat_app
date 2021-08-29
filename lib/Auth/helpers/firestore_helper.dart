@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 import '../../country_model.dart';
 import '../register_request.dart';
 import '../user_model.dart';
@@ -21,10 +20,10 @@ class FirestoreHelper {
     }
   }
 
-  getUserFromFirestore(String userId) async {
+  Future<UserModel> getUserFromFirestore(String userId) async {
     DocumentSnapshot documentSnapshot =
         await firebaseFirestore.collection('Users').doc(userId).get();
-
+    return UserModel.fromMap(documentSnapshot.data());
     print(documentSnapshot.data());
   }
 
@@ -51,5 +50,12 @@ class FirestoreHelper {
     } on Exception catch (e) {
       // TODO
     }
+  }
+
+  updateProfile(UserModel userModel) async {
+    await firebaseFirestore
+        .collection('Users')
+        .doc(userModel.id)
+        .update(userModel.toMap());
   }
 }

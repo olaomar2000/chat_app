@@ -1,5 +1,6 @@
-
 import 'package:firebase_gsg/Auth/helpers/firestore_helper.dart';
+import 'package:firebase_gsg/chats/profile.dart';
+import 'package:firebase_gsg/chats/user.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -7,14 +8,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
-      body:Center(
-        child: RaisedButton(onPressed: () {
-
-      FirestoreHelper.firestoreHelper.getAllUsersFromFirestore();
-    }
-    ),
-      ),
-    );
+    return DefaultTabController(
+        length: 2,
+        child:
+            Scaffold(body: TabBarView(children: [UsersPage(), ProfilePage()])));
   }
 }

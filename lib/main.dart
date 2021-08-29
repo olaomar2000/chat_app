@@ -1,5 +1,8 @@
 import 'package:firebase_gsg/Auth/providers/auth_provider.dart';
+import 'package:firebase_gsg/Auth/ui/auth_main_page.dart';
 import 'package:firebase_gsg/Auth/ui/login.dart';
+import 'package:firebase_gsg/chats/profile.dart';
+import 'package:firebase_gsg/chats/user.dart';
 import 'package:firebase_gsg/services/routes_helper.dart';
 import 'package:firebase_gsg/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'Auth/ui/reset_password_page.dart';
 import 'Auth/ui/singup.dart';
 import 'chats/home_page.dart';
+
 // void main() {
 //   runApp(ChangeNotifierProvider(
 //     create: (context)=> AuthProvider(),
@@ -17,27 +21,24 @@ import 'chats/home_page.dart';
 void main() {
   runApp(ChangeNotifierProvider<AuthProvider>(
       create: (context) => AuthProvider(),
-      child: MaterialApp(
-          routes: {
-
-            login.routeName: (context) => login(),
-            singup.routeName: (context) => singup(),
-            ResetPasswordPage.routeName: (context) => ResetPasswordPage(),
-            HomePage.routeName: (context) => HomePage(),
-          },
-          navigatorKey: RouteHelper.routeHelper.navKey,
-          home: firebase_conf())));
+      child: MaterialApp(routes: {
+        login.routeName: (context) => login(),
+        singup.routeName: (context) => singup(),
+        ResetPasswordPage.routeName: (context) => ResetPasswordPage(),
+        HomePage.routeName: (context) => HomePage(),
+        AuthMainPage.routeName: (context) => AuthMainPage(),
+        UsersPage.routeName: (context) => UsersPage(),
+        ProfilePage.routeName: (context) => ProfilePage(),
+      }, navigatorKey: RouteHelper.routeHelper.navKey, home: firebase_conf())));
 }
- 
 
-class firebase_conf extends StatelessWidget{
+class firebase_conf extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return  FutureBuilder<FirebaseApp>(
+    return FutureBuilder<FirebaseApp>(
       // Initialize FlutterFire:
       future: Firebase.initializeApp(),
       builder: (context, AsyncSnapshot<FirebaseApp> snapshot) {
-        
         if (snapshot.hasError) {
           print(snapshot.error.toString());
           return Text(snapshot.error.toString());
@@ -46,7 +47,7 @@ class firebase_conf extends StatelessWidget{
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
           print('done');
-          return splash();
+          return SplachScreen();
         }
         return Scaffold(
           body: Center(
@@ -56,5 +57,4 @@ class firebase_conf extends StatelessWidget{
       },
     );
   }
-
 }
