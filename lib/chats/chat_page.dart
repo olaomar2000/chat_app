@@ -16,6 +16,8 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   final messageControler = TextEditingController();
 
+  final ScrollController _controller = ScrollController();
+
   String sender = AuthHelper.authHelper.getUserId();
 
   String message;
@@ -44,6 +46,9 @@ class _ChatPageState extends State<ChatPage> {
                       stream:
                           FirestoreHelper.firestoreHelper.getFirestoreStream(),
                       builder: (context, datasnapshot) {
+                        Future.delayed(Duration(milliseconds: 100)).then((value) => {
+                        _controller.jumpTo(_controller.position.maxScrollExtent)
+                        });
                         if (!datasnapshot.hasData) {
                           return Center(
                             child: CircularProgressIndicator(
@@ -55,6 +60,7 @@ class _ChatPageState extends State<ChatPage> {
                         List<Map> messages =
                             querySnapshot.docs.map((e) => e.data()).toList();
                         return ListView.builder(
+                          controller: _controller,
                             itemCount: messages.length,
                             itemBuilder: (context, index) {
                               return MessageBubble(
@@ -97,6 +103,7 @@ class _ChatPageState extends State<ChatPage> {
                               ),
                               onPressed: () {
                                 messageControler.clear();
+
                                 sendToFirestore();
                               }))
                     ],
