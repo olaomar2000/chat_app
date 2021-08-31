@@ -10,6 +10,7 @@ import 'widgets/custom_button.dart';
 
 class singup extends StatelessWidget {
   static final routeName = '/register';
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(builder: (context, provider, x) {
@@ -19,14 +20,14 @@ class singup extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-/*child: Image.asset(
-                    'assets/images/singup.png',
-                    height: 290,
-                    width: double.infinity,
-                  ),*/
-                ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                //   child: Image.asset(
+                //     'assets/images/singup.png',
+                //     height: 290,
+                //     width: double.infinity,
+                //   ),
+                // ),
                 SizedBox(
                   height: 30,
                 ),

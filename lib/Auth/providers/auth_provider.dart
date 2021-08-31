@@ -5,7 +5,8 @@ import 'package:firebase_gsg/Auth/helpers/firestore_helper.dart';
 import 'package:firebase_gsg/Auth/helpers/sp_helper.dart';
 import 'package:firebase_gsg/Auth/register_request.dart';
 import 'package:firebase_gsg/Auth/helpers/auth_helper.dart';
-import 'package:firebase_gsg/Auth/ui/auth_main_page.dart';
+import 'package:firebase_gsg/chats/user.dart';
+import '../../chats/chat_page.dart';
 import 'package:firebase_gsg/Auth/ui/login.dart';
 import 'package:firebase_gsg/Auth/ui/singup.dart';
 import 'package:firebase_gsg/Auth/user_model.dart';
@@ -23,6 +24,19 @@ import 'package:image_picker/image_picker.dart';
 import '../../country_model.dart';
 
 class AuthProvider extends ChangeNotifier {
+
+
+  List<UserModel> users;
+  String myId;
+
+  getAllUsers() async {
+    users = await FirestoreHelper.firestoreHelper.getAllUsersFromFirestore();
+    users.removeWhere((element) => element.id == myId);
+    notifyListeners();
+  }
+
+
+
 // TabController tabController;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -65,7 +79,7 @@ class AuthProvider extends ChangeNotifier {
             fName: FName.text,
             lName: LName.text,
             id: user.id,
-            imageUrl: imageUrl);
+            imageUrl: imageUrl ?? user.imageUrl);
 
     await FirestoreHelper.firestoreHelper.updateProfile(userModel);
     getUserFromFirestore();
@@ -110,19 +124,27 @@ class AuthProvider extends ChangeNotifier {
   getUserFromFirestore() async {
     String userId = AuthHelper.authHelper.getUserId();
     user = await FirestoreHelper.firestoreHelper.getUserFromFirestore(userId);
+
     notifyListeners();
   }
+
+
+
 
   resetControllers() {
     emailController.clear();
     passwordController.clear();
   }
 
+
+
   checkLogin() {
     bool isLoggedIn = AuthHelper.authHelper.checkUserLoging();
-    print(FirebaseAuth.instance.currentUser);
+
     if (isLoggedIn) {
-      RouteHelper.routeHelper.goToPageWithReplacement(ProfilePage.routeName);
+      this.myId = AuthHelper.authHelper.getUserId();
+      getAllUsers();
+      RouteHelper.routeHelper.goToPageWithReplacement(UsersPage.routeName);
     } else {
       RouteHelper.routeHelper.goToPageWithReplacement(singup.routeName);
     }
@@ -157,7 +179,7 @@ class AuthProvider extends ChangeNotifier {
 
   logout() async {
     await AuthHelper.authHelper.logout();
-    RouteHelper.routeHelper.goToPageWithReplacement(AuthMainPage.routeName);
+    RouteHelper.routeHelper.goToPageWithReplacement(login.routeName);
   }
 
   login1() async {
@@ -168,7 +190,7 @@ class AuthProvider extends ChangeNotifier {
     bool isVerifiedEmail = AuthHelper.authHelper.checkEmailVerification();
     //  if (isVerifiedEmail) {
     print('done');
-    RouteHelper.routeHelper.goToPageWithReplacement(ProfilePage.routeName);
+    RouteHelper.routeHelper.goToPageWithReplacement(UsersPage.routeName);
     // } else {
     // CustomDialoug.customDialoug.showCustomDialoug(
     //   'You have to verify your email, press ok to send another email',

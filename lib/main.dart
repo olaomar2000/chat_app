@@ -1,6 +1,6 @@
 import 'package:firebase_gsg/Auth/providers/auth_provider.dart';
-import 'package:firebase_gsg/Auth/ui/auth_main_page.dart';
 import 'package:firebase_gsg/Auth/ui/login.dart';
+import 'package:firebase_gsg/chats/chat_page.dart';
 import 'package:firebase_gsg/chats/profile.dart';
 import 'package:firebase_gsg/chats/user.dart';
 import 'package:firebase_gsg/services/routes_helper.dart';
@@ -26,9 +26,9 @@ void main() {
         singup.routeName: (context) => singup(),
         ResetPasswordPage.routeName: (context) => ResetPasswordPage(),
         HomePage.routeName: (context) => HomePage(),
-        AuthMainPage.routeName: (context) => AuthMainPage(),
         UsersPage.routeName: (context) => UsersPage(),
         ProfilePage.routeName: (context) => ProfilePage(),
+        ChatPage.routeName: (context) => ChatPage(),
       }, navigatorKey: RouteHelper.routeHelper.navKey, home: firebase_conf())));
 }
 

@@ -3,11 +3,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../country_model.dart';
 import '../register_request.dart';
 import '../user_model.dart';
+import 'auth_helper.dart';
 
 class FirestoreHelper {
   FirestoreHelper._();
   static FirestoreHelper firestoreHelper = FirestoreHelper._();
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+
+
+  Stream<QuerySnapshot> getFirestoreStream() {
+    return firebaseFirestore.collection('Chats').orderBy('dateTime').snapshots();
+  }
+
+  addMessageToFirestore(Map map) async {
+    firebaseFirestore
+        .collection('Chats')
+        .add({...map, 'userId': AuthHelper.authHelper.getUserId()});
+  }
   addUserToFirestore(RegisterRequest registerRequest) async {
     try {
       // await firebaseFirestore.collection('Users').add(registerRequest.toMap());
