@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 class UsersPage extends StatelessWidget {
   static final routeName = 'users';
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -16,7 +17,8 @@ class UsersPage extends StatelessWidget {
           actions: [
             IconButton(
               onPressed: () {
-                RouteHelper.routeHelper.goToPageWithReplacement(ChatPage.routeName);
+                RouteHelper.routeHelper
+                    .goToPageWithReplacement(ChatPage.routeName);
               },
               icon: Icon(Icons.group),
             )
@@ -27,40 +29,42 @@ class UsersPage extends StatelessWidget {
             if (provider.users == null) {
               print('pppppp');
               return Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xffE5B2CA)),
+                ),
               );
             } else {
               return ListView.builder(
                   itemCount: provider.users.length,
                   itemBuilder: (context, index) {
                     return Container(
-                      margin: EdgeInsets.all(10),
-                      padding: EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 40,
-                            backgroundImage:
-                            NetworkImage(provider.users[index].imageUrl),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(provider.users[index].fName +
-                                  ' ' +
-                                  provider.users[index].lName),
-                              Text(provider.users[index].email),
-                              // Text(provider.users[index].country +
-                              //     ' - ' +
-                              //     provider.users[index].city),
-                            ],
-                          )
-                        ],
-                      ),
-                    );
+
+                        padding: EdgeInsets.all(10),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 28,
+                              backgroundImage:
+                                  NetworkImage(provider.users[index].imageUrl),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            GestureDetector(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(provider.users[index].fName +
+                                      ' ' +
+                                      provider.users[index].lName),
+                                  Text(provider.users[index].email)
+                                ],
+                              ),
+                            ),
+                          ],
+                        ));
                   });
             }
           },

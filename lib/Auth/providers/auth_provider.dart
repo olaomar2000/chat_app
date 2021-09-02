@@ -20,6 +20,8 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_gsg/Auth/ui/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:audio_recorder/audio_recorder.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../country_model.dart';
 
@@ -109,6 +111,39 @@ class AuthProvider extends ChangeNotifier {
     selectCountry(countries.first);
     notifyListeners();
   }
+
+
+  sendImageToChat([String message]) async {
+//     Directory directory = await getApplicationDocumentsDirectory();
+//
+//     bool hasPermissions = await AudioRecorder.hasPermissions;
+//
+// // Get the state of the recorder
+//     bool isRecording = await AudioRecorder.isRecording;
+//
+// // Start recording
+//     await AudioRecorder.start(
+//         path: directory.path + '/aaa',
+//         audioOutputFormat: AudioOutputFormat.AAC);
+//
+//     await Future.delayed(Duration(seconds: 5));
+//     Recording recording = await AudioRecorder.stop();
+//     print(
+//         "Path : ${recording.path},  Format : ${recording.audioOutputFormat},  Duration : ${recording.duration},  Extension : ${recording.extension},");
+
+    PickedFile  file = await ImagePicker().getImage(source: ImageSource.gallery);
+    File file2 = File(file.path);
+    String imageUrl = await FirebaseStorageHelper.firebaseStorageHelper
+        .uploadImage(file2, 'chats');
+    FirestoreHelper.firestoreHelper.addMessageToFirestore({
+      'userId': this.myId,
+      'dateTime': DateTime.now(),
+      'message': message ?? '',
+      'imageUrl': imageUrl
+    });
+  }
+
+
 
 ///////////////////////////////////////////////////
   ///upload Image

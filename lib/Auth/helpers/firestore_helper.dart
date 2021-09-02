@@ -39,6 +39,8 @@ class FirestoreHelper {
     print(documentSnapshot.data());
   }
 
+
+
   Future<List<UserModel>> getAllUsersFromFirestore() async {
     QuerySnapshot querySnapshot =
         await firebaseFirestore.collection('Users').get();
