@@ -1,5 +1,6 @@
 import 'package:firebase_gsg/Auth/providers/auth_provider.dart';
 import 'package:firebase_gsg/Auth/ui/login.dart';
+import 'package:firebase_gsg/Auth/ui/widgets/bottom_bar.dart';
 import 'package:firebase_gsg/chats/chat_page.dart';
 import 'package:firebase_gsg/chats/profile.dart';
 import 'package:firebase_gsg/chats/user.dart';
@@ -11,7 +12,7 @@ import 'package:provider/provider.dart';
 
 import 'Auth/ui/reset_password_page.dart';
 import 'Auth/ui/singup.dart';
-import 'chats/home_page.dart';
+
 
 // void main() {
 //   runApp(ChangeNotifierProvider(
@@ -25,7 +26,7 @@ void main() {
         login.routeName: (context) => login(),
         singup.routeName: (context) => singup(),
         ResetPasswordPage.routeName: (context) => ResetPasswordPage(),
-        HomePage.routeName: (context) => HomePage(),
+       Home.routeName :(context) => Home(),
         UsersPage.routeName: (context) => UsersPage(),
         ProfilePage.routeName: (context) => ProfilePage(),
         ChatPage.routeName: (context) => ChatPage(),

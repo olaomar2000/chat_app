@@ -5,12 +5,12 @@ import 'package:firebase_gsg/Auth/helpers/firestore_helper.dart';
 import 'package:firebase_gsg/Auth/helpers/sp_helper.dart';
 import 'package:firebase_gsg/Auth/register_request.dart';
 import 'package:firebase_gsg/Auth/helpers/auth_helper.dart';
+import 'package:firebase_gsg/Auth/ui/widgets/bottom_bar.dart';
 import 'package:firebase_gsg/chats/user.dart';
 import '../../chats/chat_page.dart';
 import 'package:firebase_gsg/Auth/ui/login.dart';
 import 'package:firebase_gsg/Auth/ui/singup.dart';
 import 'package:firebase_gsg/Auth/user_model.dart';
-import 'package:firebase_gsg/chats/home_page.dart';
 import 'package:firebase_gsg/chats/profile.dart';
 import 'package:firebase_gsg/services/custom_dialoug.dart';
 import 'package:firebase_gsg/services/routes_helper.dart';
@@ -111,25 +111,29 @@ class AuthProvider extends ChangeNotifier {
     selectCountry(countries.first);
     notifyListeners();
   }
+ SendAduioToChat([String message])async{
+       Directory directory = await getApplicationDocumentsDirectory();
+
+    bool hasPermissions = await AudioRecorder.hasPermissions;
+
+// Get the state of the recorder
+    bool isRecording = await AudioRecorder.isRecording;
+
+// Start recording
+    await AudioRecorder.start(
+        path: directory.path + '/.mp3',
+        audioOutputFormat: AudioOutputFormat.AAC);
+
+    await Future.delayed(Duration(seconds: 5));
+    Recording recording = await AudioRecorder.stop();
+    print(
+        "Path : ${recording.path},  Format : ${recording.audioOutputFormat},  Duration : ${recording.duration},  Extension : ${recording.extension},");
+
+ }
+
 
 
   sendImageToChat([String message]) async {
-//     Directory directory = await getApplicationDocumentsDirectory();
-//
-//     bool hasPermissions = await AudioRecorder.hasPermissions;
-//
-// // Get the state of the recorder
-//     bool isRecording = await AudioRecorder.isRecording;
-//
-// // Start recording
-//     await AudioRecorder.start(
-//         path: directory.path + '/aaa',
-//         audioOutputFormat: AudioOutputFormat.AAC);
-//
-//     await Future.delayed(Duration(seconds: 5));
-//     Recording recording = await AudioRecorder.stop();
-//     print(
-//         "Path : ${recording.path},  Format : ${recording.audioOutputFormat},  Duration : ${recording.duration},  Extension : ${recording.extension},");
 
     PickedFile  file = await ImagePicker().getImage(source: ImageSource.gallery);
     File file2 = File(file.path);
@@ -179,7 +183,7 @@ class AuthProvider extends ChangeNotifier {
     if (isLoggedIn) {
       this.myId = AuthHelper.authHelper.getUserId();
       getAllUsers();
-      RouteHelper.routeHelper.goToPageWithReplacement(UsersPage.routeName);
+      RouteHelper.routeHelper.goToPageWithReplacement(Home.routeName);
     } else {
       RouteHelper.routeHelper.goToPageWithReplacement(singup.routeName);
     }
@@ -225,7 +229,7 @@ class AuthProvider extends ChangeNotifier {
     bool isVerifiedEmail = AuthHelper.authHelper.checkEmailVerification();
     //  if (isVerifiedEmail) {
     print('done');
-    RouteHelper.routeHelper.goToPageWithReplacement(UsersPage.routeName);
+    RouteHelper.routeHelper.goToPageWithReplacement(Home.routeName);
     // } else {
     // CustomDialoug.customDialoug.showCustomDialoug(
     //   'You have to verify your email, press ok to send another email',

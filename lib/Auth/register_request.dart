@@ -9,6 +9,7 @@ String country;
 String FName;
 String LName;
 String imageUrl;
+
 RegisterRequest({
   @required this.id,
   @required this.email,
@@ -27,8 +28,7 @@ toMap(){
     'lName':this.LName,
     'city': this.city,
     'country': this.country,
-
-    'imageUrl': this.imageUrl
+    'imageUrl': this.imageUrl ,
   };
 
 

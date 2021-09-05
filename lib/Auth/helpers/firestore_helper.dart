@@ -25,6 +25,7 @@ class FirestoreHelper {
       // await firebaseFirestore.collection('Users').add(registerRequest.toMap());
       await firebaseFirestore
           .collection('Users')
+
           .doc(registerRequest.id)
           .set(registerRequest.toMap());
     } on Exception catch (e) {

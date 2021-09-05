@@ -24,27 +24,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-        backgroundColor: Colors.grey[300],
-        appBar: AppBar(
-          title: Text('Profile Page'),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Provider.of<AuthProvider>(context, listen: false)
-                      .fillControllers();
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return UpdateProgile();
-                  }));
-                },
-                icon: Icon(Icons.edit)),
-            IconButton(
-                onPressed: () {
-                  Provider.of<AuthProvider>(context, listen: false).logout();
-                },
-                icon: Icon(Icons.logout))
-          ],
-        ),
+        backgroundColor: Color(0xffF9F1F3),
         body: Consumer<AuthProvider>(
           builder: (context, provider, x) {
             return provider.user == null
@@ -54,6 +34,68 @@ class _ProfilePageState extends State<ProfilePage> {
                 : Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      Container(
+                        height: 120,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Color(0xffE5B2CA),
+                          borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(36),
+                              bottomLeft: Radius.circular(36)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xffE5B2CA).withOpacity(0.5),
+                              spreadRadius: 5,
+                              blurRadius: 7,
+                              offset:
+                                  Offset(0, 5), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              top: 55, left: 80, right: 24, bottom: 30),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'Group',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  IconButton(
+                                      onPressed: () {
+                                        Provider.of<AuthProvider>(context,
+                                                listen: false)
+                                            .fillControllers();
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          return UpdateProgile();
+                                        }));
+                                      },
+                                      icon: Icon(Icons.edit),color: Colors.white,),
+                                  IconButton(
+                                      onPressed: () {
+                                        Provider.of<AuthProvider>(context,
+                                                listen: false)
+                                            .logout();
+                                      },
+                                      icon: Icon(Icons.logout),color: Colors.white,),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         height: 30,
                       ),
@@ -76,7 +118,9 @@ class _ProfilePageState extends State<ProfilePage> {
 class ItemWidget extends StatelessWidget {
   String label;
   String value;
+
   ItemWidget(this.label, this.value);
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
